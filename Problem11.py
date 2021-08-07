@@ -1,3 +1,13 @@
+"""
+In the 20×20 grid below, four numbers along a diagonal line have been marked in red
+
+*grid here*
+
+The product of these numbers is 26 × 63 × 78 × 14 = 1788696.
+
+What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
+"""
+
 def grid():
     numberList = [[8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8],
     [49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0],
@@ -40,16 +50,28 @@ def grid():
             if product > biggestProduct:
                 biggestProduct = product
 
-    #Diagonal
+    #Diagonal left to right
     for k in range(0, len(numberList)):
         for i in range(3, len(numberList)):
-            product = 1
             for j in range(i-3, i+1):
-                print(k, k, product)
-                product *= numberList[k][k]
-            if product > biggestProduct:
-                biggestProduct = product
+                product = 1
+                for l in range(0, 4):
+                    if j + l < len(numberList) and k + l < len(numberList):
+                        product *= numberList[j+l][k+l]
+                if product > biggestProduct:
+                    biggestProduct = product
 
-    print(biggestProduct)
+    #Diagonal right to left
+    for k in range(0, len(numberList)):
+        for i in range(3, len(numberList)):
+            for j in range(i-3, i+1):
+                product = 1
+                for l in range(0, 4):
+                    if j-l+3 < len(numberList) and k+l < len(numberList):
+                        product *= numberList[j-l+3][k+l]
+                if product > biggestProduct:
+                    biggestProduct = product
 
-grid()
+    return biggestProduct
+
+print(grid())
