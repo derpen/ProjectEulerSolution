@@ -1,0 +1,13 @@
+def evenlyDivisible(numRange):
+
+    smallestNumber = 2520
+    checkList = [11, 13, 14, 16, 17, 18, 19, 20]
+
+    while True:
+        for n in checkList:
+            if all(smallestNumber % n = 0):
+                return smallestNumber
+        smallestNumber += 2520
+        return None
+
+print(evenlyDivisible(20))
